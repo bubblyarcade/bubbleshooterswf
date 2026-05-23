@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Shooter Arcade</title>
+    
+    <!-- Load Ruffle Emulator via Cloud CDN -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+    <style>
+        /* Reset margins and hidden scrollbars to ensure true fullscreen */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000000;
+        }
+
+        /* The game container takes up 100% of the viewport width and height */
+        #arcade-fullscreen-container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This empty div acts as the full-window frame for the game -->
+    <div id="arcade-fullscreen-container"></div>
+
+    <script>
+        window.addEventListener("load", (event) => {
+            // Initialize the Ruffle framework
+            const ruffle = window.RufflePlayer.newest();
+            
+            // Create a canvas player element
+            const player = ruffle.createPlayer();
+            
+            // Inject the player inside our fullscreen container
+            const container = document.getElementById("arcade-fullscreen-container");
+            container.appendChild(player);
+            
+            // Set the Ruffle canvas player itself to fill 100% of the screen
+            player.style.width = "100%";
+            player.style.height = "100%";
+
+            // Load your specific GitHub raw SWF file
+            player.load({
+                url: "https://github.com/bubblyarcade/bubbleshooterswf/raw/refs/heads/main/bubble-shooter.swf",
+                backgroundColor: "#000000",
+                allowUnsafeOriginals: true // Enables cross-origin file loading from GitHub's servers
+            });
+        });
+    </script>
+
+</body>
+</html>

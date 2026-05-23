@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Shooter Arcade</title>
+
+    <!-- Load Ruffle Emulator via Cloud CDN -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+    <style>
+        /* Force the browser page to remove borders and scrollbars */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000000;
+        }
+
+        /* The game div container stretches to 100% full screen dimensions */
+        #arcade-fullscreen-container {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Target frame for the fullscreen layout -->
+    <div id="arcade-fullscreen-container"></div>
+
+    <script>
+        window.addEventListener("load", (event) => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+
+            const container = document.getElementById("arcade-fullscreen-container");
+            container.appendChild(player);
+
+            // Set the absolute inner layout to stretch flawlessly
+            player.style.width = "100%";
+            player.style.height = "100%";
+
+            // FIXED URL: Running your GitHub file through the jsDelivr CDN to bypass the CORS block
+            player.load({
+                url: "https://cdn.jsdelivr.net/gh/bubblyarcade/bubbleshooterswf@main/bubble-shooter.swf",
+                backgroundColor: "#000000"
+            });
+        });
+    </script>
+
+</body>
+</html>
